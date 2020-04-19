@@ -1,0 +1,7 @@
+name as "Nathan"
+
+people as list ["John", "Paul", "Ringo"]
+
+address as tuple ("1610 Store Street", "Apt 219", "V8W 0E3")
+
+add as fn (x, y) -> x + y
