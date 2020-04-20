@@ -15,6 +15,9 @@
   "author": "Nathan Calvank",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/generator": "^7.9.5",
+    "@babel/traverse": "^7.9.5",
     "axios": "^0.19.0",
     "express": "^4.17.1"
   },

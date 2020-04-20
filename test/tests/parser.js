@@ -3,33 +3,9 @@ import parse from "../../parser.js";
 // Test empty file
 let testAST = {
   type: "File",
-  start: 0,
-  end: 0,
-  loc: {
-    start: {
-      line: 1,
-      column: 0,
-    },
-    end: {
-      line: 1,
-      column: 0,
-    },
-  },
   errors: [],
   program: {
     type: "Program",
-    start: 0,
-    end: 0,
-    loc: {
-      start: {
-        line: 1,
-        column: 0,
-      },
-      end: {
-        line: 1,
-        column: 0,
-      },
-    },
     sourceType: "module",
     interpreter: null,
     body: [],
@@ -38,7 +14,7 @@ let testAST = {
   comments: [],
 };
 
-let code = `name as "Nathan"`;
+let code = ``;
 
 let output = parse(code);
 
@@ -50,100 +26,23 @@ console.log(stringifiedAST === stringifiedOutput);
 // Test variable assignment
 testAST = {
   type: "File",
-  start: 0,
-  end: 21,
-  loc: {
-    start: {
-      line: 1,
-      column: 0,
-    },
-    end: {
-      line: 1,
-      column: 21,
-    },
-  },
   errors: [],
   program: {
     type: "Program",
-    start: 0,
-    end: 21,
-    loc: {
-      start: {
-        line: 1,
-        column: 0,
-      },
-      end: {
-        line: 1,
-        column: 21,
-      },
-    },
     sourceType: "module",
     interpreter: null,
     body: [
       {
         type: "VariableDeclaration",
-        start: 0,
-        end: 21,
-        loc: {
-          start: {
-            line: 1,
-            column: 0,
-          },
-          end: {
-            line: 1,
-            column: 21,
-          },
-        },
         declarations: [
           {
             type: "VariableDeclarator",
-            start: 6,
-            end: 21,
-            loc: {
-              start: {
-                line: 1,
-                column: 6,
-              },
-              end: {
-                line: 1,
-                column: 21,
-              },
-            },
             id: {
               type: "Identifier",
-              start: 6,
-              end: 10,
-              loc: {
-                start: {
-                  line: 1,
-                  column: 6,
-                },
-                end: {
-                  line: 1,
-                  column: 10,
-                },
-                identifierName: "name",
-              },
               name: "name",
             },
             init: {
               type: "StringLiteral",
-              start: 13,
-              end: 21,
-              loc: {
-                start: {
-                  line: 1,
-                  column: 13,
-                },
-                end: {
-                  line: 1,
-                  column: 21,
-                },
-              },
-              extra: {
-                rawValue: "Nathan",
-                raw: '"Nathan"',
-              },
               value: "Nathan",
             },
           },
@@ -162,8 +61,6 @@ output = parse(code);
 
 stringifiedAST = JSON.stringify(testAST);
 stringifiedOutput = JSON.stringify(output);
-
-console.log(JSON.stringify(output, null, 4, 4));
 
 console.log(stringifiedAST === stringifiedOutput);
 
