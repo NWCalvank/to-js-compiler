@@ -10,7 +10,7 @@
     "execute": "node ./dist/output.js",
     "example-server": "node --experimental-modules ./manualJS/server.js",
     "start": "npm run build && npm run execute",
-    "test": "node ./test/tests/parser.js"
+    "test": "node ./test/all.js"
   },
   "author": "Nathan Calvank",
   "license": "ISC",
