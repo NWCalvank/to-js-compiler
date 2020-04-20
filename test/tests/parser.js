@@ -193,3 +193,75 @@ stringifiedAST = JSON.stringify(testAST);
 stringifiedOutput = JSON.stringify(output);
 
 console.log(stringifiedAST === stringifiedOutput);
+
+testAST = {
+  type: "File",
+  errors: [],
+  program: {
+    type: "Program",
+    sourceType: "module",
+    interpreter: null,
+    body: [
+      {
+        type: "VariableDeclaration",
+        declarations: [
+          {
+            type: "VariableDeclarator",
+            id: {
+              type: "Identifier",
+              name: "me",
+            },
+            init: {
+              type: "StringLiteral",
+              value: "Nathan",
+            },
+          },
+        ],
+        kind: "const",
+      },
+      {
+        type: "ExpressionStatement",
+        expression: {
+          type: "CallExpression",
+          callee: {
+            type: "MemberExpression",
+            object: {
+              type: "Identifier",
+              name: "console",
+            },
+            property: {
+              type: "Identifier",
+              name: "log",
+            },
+            computed: false,
+          },
+          arguments: [
+            {
+              type: "Identifier",
+              name: "me",
+            },
+            {
+              type: "StringLiteral",
+              value: "Billy",
+            },
+          ],
+        },
+      },
+    ],
+    directives: [],
+  },
+  comments: [],
+};
+
+code = `
+me as "Nathan"
+
+print me "Billy"
+`;
+
+output = parse(code);
+
+stringifiedAST = JSON.stringify(testAST);
+stringifiedOutput = JSON.stringify(output);
+
+console.log(stringifiedAST === stringifiedOutput);

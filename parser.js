@@ -54,6 +54,13 @@ const Argument = name => ({
   name,
 });
 
+const StringLiteral = value => ({
+  type: "StringLiteral",
+  value,
+});
+
+const cleanString = str => str.replace(/"/g, "");
+
 const ASSIGNMENT = "as";
 const STRING = "StringLiteral";
 
@@ -68,17 +75,13 @@ const parseProgram = (sourceCode, ast) => {
     const line = lines[i];
     const tokens = line.split(" ");
 
-    if (line.length === 0) {
-      continue;
-    }
-
     if (isDeclaration(tokens)) {
       let value = tokens[tokens.length - 1];
       let type;
 
       if (isString(value)) {
         type = STRING;
-        value = value.replace(/"/g, "");
+        value = cleanString(value);
       }
       const declaration = VariableDeclaration();
       const declarator = VariableDeclarator(tokens[0], type);
@@ -93,7 +96,12 @@ const parseProgram = (sourceCode, ast) => {
       const values = line.split(" ").slice(1);
       const statement = ConsoleStatement();
 
-      statement.expression.arguments = values.map(Argument);
+      statement.expression.arguments = values.map(value => {
+        if (isString(value)) {
+          return StringLiteral(cleanString(value));
+        }
+        return Argument(value);
+      });
 
       ast.program.body.push(statement);
     }
