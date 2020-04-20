@@ -29,10 +29,36 @@ const VariableDeclarator = (token, type) => ({
   },
 });
 
+const ConsoleStatement = () => ({
+  type: "ExpressionStatement",
+  expression: {
+    type: "CallExpression",
+    callee: {
+      type: "MemberExpression",
+      object: {
+        type: "Identifier",
+        name: "console",
+      },
+      property: {
+        type: "Identifier",
+        name: "log",
+      },
+      computed: false,
+    },
+    arguments: [],
+  },
+});
+
+const Argument = name => ({
+  type: "Identifier",
+  name,
+});
+
 const ASSIGNMENT = "as";
 const STRING = "StringLiteral";
 
 const isDeclaration = line => line.includes(ASSIGNMENT);
+const isLog = line => line.match(/^print\s/g) !== null;
 const isString = value => value.match(/"/g) !== null;
 
 const parseProgram = (sourceCode, ast) => {
@@ -52,7 +78,7 @@ const parseProgram = (sourceCode, ast) => {
 
       if (isString(value)) {
         type = STRING;
-        value = value.replace(/"/g, "")
+        value = value.replace(/"/g, "");
       }
       const declaration = VariableDeclaration();
       const declarator = VariableDeclarator(tokens[0], type);
@@ -61,6 +87,15 @@ const parseProgram = (sourceCode, ast) => {
       declaration.declarations = [declarator];
 
       ast.program.body.push(declaration);
+    }
+
+    if (isLog(line)) {
+      const values = line.split(" ").slice(1);
+      const statement = ConsoleStatement();
+
+      statement.expression.arguments = values.map(Argument);
+
+      ast.program.body.push(statement);
     }
   }
 
