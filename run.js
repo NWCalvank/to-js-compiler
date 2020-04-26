@@ -9,5 +9,5 @@ const code = fs.readFileSync("./entry.poc", "utf8");
 const ast = parse(code);
 
 // Convert AST to JS via Babel
-const output = generator.default(ast, code);
+const output = generator.default(ast);
 fs.writeFileSync("./dist/output.js", output.code);

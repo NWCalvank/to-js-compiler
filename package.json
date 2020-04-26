@@ -3,12 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "description": "Proof of concept language compiler for the lulz.",
-  "main": ".eslintrc.js",
+  "main": "run.js",
   "scripts": {
-    "build": "node --experimental-modules compiler.js",
-    "examples": "node --experimental-modules ./manualJS/examples.js",
+    "build": "node --experimental-modules run.js",
     "execute": "node ./dist/output.js",
-    "example-server": "node --experimental-modules ./manualJS/server.js",
     "start": "npm run build && npm run execute",
     "test": "node ./test/all.js"
   },
