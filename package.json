@@ -17,7 +17,7 @@
     "@babel/generator": "^7.9.5",
     "@babel/traverse": "^7.9.5",
     "axios": "^0.21.1",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "eslint": "^5.5.0",
